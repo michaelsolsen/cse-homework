@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Wrangler
+.wrangler/
+.dev.vars*
+!.dev.vars.example
+
+# Secrets and credentials
+*.pem
+*.key
+credentials.json
+.env*
+!.env.example
+
+# Cloudflare Tunnel
+*.json
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+temp-flags/
+flags/
+
+# Build artifacts
+dist/
+build/
+*.tsbuildinfo
+worker-configuration.d.ts
+
+# Local documentation and utilities (keep local, not in repo)
+*.sh
+*.pdf
+*.docx
+*.doc
+~$*
+logo.svg
+IMPLEMENTATION.md
+README-server.md
+cloudflare-access-setup.md
+deploy-gcp.md
+workers/docs/

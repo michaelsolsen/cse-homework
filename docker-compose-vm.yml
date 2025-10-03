@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  header-echo-server:
+    build: .
+    ports:
+      - "127.0.0.1:8777:8777"  # Bind to localhost only (not exposed to internet)
+    environment:
+      - PORT=8777
+    container_name: header-echo-server
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

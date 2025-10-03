@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  header-echo-server:
+    build: .
+    ports:
+      - "8777:8777"
+    environment:
+      - PORT=8777
+    container_name: header-echo-server-local
+    restart: unless-stopped
