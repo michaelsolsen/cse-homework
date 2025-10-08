@@ -1,0 +1,5 @@
+# Root-level wrangler config redirects to the actual Worker
+# This is only needed if Cloudflare Pages is auto-deploying from the repo root
+
+# The actual Worker configuration is in workers/header-auth-worker/wrangler.jsonc
+# Deploy using: cd workers/header-auth-worker && npx wrangler deploy
