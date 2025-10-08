@@ -26,6 +26,17 @@
 			"binding": "FLAGS",
 			"bucket_name": "country-flags"
 		}
+	],
+	/**
+	 * Custom domain route
+	 * With Access configured on this route, the Worker receives Cf-Access-Jwt-Assertion header
+	 */
+	"routes": [
+		{
+			"pattern": "tunnel.aiprovinggrounds.ai/secure*",
+			"zone_name": "aiprovinggrounds.ai",
+			"custom_domain": false
+		}
 	]
 	/**
 	 * Smart Placement

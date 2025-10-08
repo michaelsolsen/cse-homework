@@ -41,10 +41,23 @@ export default {
  * Handle /secure route - Parse JWT and display authentication info
  */
 async function handleSecure(request: Request): Promise<Response> {
-	// Get Cloudflare Access JWT from header
-	const jwtHeader = request.headers.get('Cf-Access-Jwt-Assertion');
+	// Get Cloudflare Access JWT from CF_Authorization cookie
+	// Workers receive the cookie set by Access, not the header (which is added at origin)
+	const cookieHeader = request.headers.get('Cookie');
+	let jwtToken: string | null = null;
 
-	if (!jwtHeader) {
+	if (cookieHeader) {
+		const cookies = cookieHeader.split(';');
+		for (const cookie of cookies) {
+			const trimmed = cookie.trim();
+			if (trimmed.startsWith('CF_Authorization=')) {
+				jwtToken = trimmed.substring('CF_Authorization='.length);
+				break;
+			}
+		}
+	}
+
+	if (!jwtToken) {
 		return new Response(
 			renderHTML('Authentication Required', '<p>No Cloudflare Access JWT found. Please authenticate.</p>'),
 			{
@@ -56,7 +69,7 @@ async function handleSecure(request: Request): Promise<Response> {
 
 	try {
 		// Decode JWT (base64url decode the payload)
-		const payload = decodeJWT(jwtHeader);
+		const payload = decodeJWT(jwtToken);
 
 		const email = payload.email || 'Unknown';
 		const country = payload.country || 'Unknown';
